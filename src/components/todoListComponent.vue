@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h1> {{ message }}</h1>
-    <input type="text" v-model="currentTask" @keypress.enter="addTask">
+    <input ref="myInput" type="text" v-model="currentTask" @keypress.enter="addTask">
     <button @click="addTask">Ajouter un joueur</button>
-
     <ul>
-      <Task :key="i" v-for="(task, i) in tasks" :taskToDisplay="task" @remove="removeTask(i)"/>
+      <Task
+          :key="i"
+          v-for="(task, i) in tasks"
+          :taskToDisplay="task"
+          @remove="removeTask(i)"
+          @end-task="task.isDone = true"
+      />
     </ul>
-
   </div>
 </template>
 
@@ -18,8 +21,8 @@ name: "todoListComponent",
   components: {Task},
   data(){
   return {
-    currentTask: "",
-    tasks: []
+    tasks: [],
+    currentTask: ""
    }
   },
   props: {
@@ -30,8 +33,11 @@ name: "todoListComponent",
   },
   methods: {
     addTask(){
-      this.tasks.push(this.currentTask);
-      this.currentTask = ""
+      this.tasks.push({
+          message: this.currentTask,
+          isDone: false
+    })
+
     },
     removeTask(index){
       this.tasks.splice(index,1)

@@ -1,28 +1,44 @@
 <template>
 <div>
-  {{ taskToDisplay }}
-  <button @click="deleteTask">Supprimez</button>
+  <span
+      :class="{taskDone:taskToDisplay.isDone}"
+      @click="$emit('end-task')">{{ taskToDisplay.message | enMajuscule }}</span><button @click="deleteTask">Supprimez</button>
 </div>
 </template>
 
 <script>
+import {endMajuscule} from "@/utils";
+
 export default {
   name: "Task",
   props:{
     taskToDisplay:{
-      type: String,
-      default: ""
+      type: Object,
+      default: {
+        message: "",
+        isDone: false
+      },
     },
   },
   methods:{
     deleteTask(){
-      this.$emit("remove")
+      this.$emit("remove");
     }
   },
-
+  filters:{
+    enMajascule: enMajuscule
+  }
 }
 </script>
 
 <style scoped>
+span{
+  width: 50%;
+  display: inline-block;
+}
+.taskDone{
+  text-decoration: line-through;
+  color: darkgrey;
+}
 
 </style>

@@ -1,19 +1,26 @@
 <template>
   <div id="app">
-    <HelloComponent/>
-    <todo-list-component/>
+    <Banner></Banner>
+    <TodoListComponent/>
+
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
+import Banner from "@/components/Banner";
 import HelloWorld from './components/HelloWorld.vue'
 import TodoListComponent from "@/components/todoListComponent";
 import HelloComponent from "@/components/HelloComponent";
+import TestComponent from "@/components/TestComponent";
+import Task from "@/components/Task";
 
 export default {
   name: 'App',
   components: {
+    Task,
+    Banner,
+    TestComponent,
     HelloComponent,
     TodoListComponent,
     HelloWorld

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {endMajuscule} from "@/utils";
+import {enMajuscule} from "@/utils";
 
 export default {
   name: "Task",

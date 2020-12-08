@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <Banner></Banner>
     <TodoListComponent/>
 
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
+import Axios from "axios";
 import Banner from "@/components/Banner";
 import HelloWorld from './components/HelloWorld.vue'
 import TodoListComponent from "@/components/todoListComponent";
@@ -24,6 +23,20 @@ export default {
     HelloComponent,
     TodoListComponent,
     HelloWorld
+  },
+  data(){
+    return {
+      film: null
+    }
+  },
+  methods: {
+    async fetchFilm(){
+      const response = await Axios.get("https://swapi.dev/api/films/1")
+      this.film = response.data
+    }
+  },
+  mounted() {
+    this.fetchFilm()
   }
 }
 </script>
